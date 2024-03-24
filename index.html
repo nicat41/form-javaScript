@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              fontFamily: {
+                body: "Nunito",
+              },
+              container: {
+                center: true,
+              },
+            },
+          },
+        };
+      </script>
+  </head>
+  <body>
+    <div class="w-[400px] mx-auto mt-[50px] border border-[#E0E0E0] rounded-[10px] overflow-hidden font-body">
+      <div class="py-[16px] text-center border-b border-[#E0E0E0] font-bold text-[20px]">
+        User Register Form
+      </div>
+      <div class="p-[17px]">
+      <form class="space-y-[16px]" id="form">
+        <div class="flex flex-col space-y-[3px]">
+            <label class="font-bold">Name</label>
+            <input id="name" class="h-[40px] px-[10px] rounded-[5px] border border-[#E0E0E0] " type="text">
+        </div>
+
+        <div class="flex flex-col space-y-[3px]">
+            <label class="font-bold">Surname</label>
+            <input id="surname" class="h-[40px] px-[10px] rounded-[5px] border border-[#E0E0E0] " type="text">
+        </div>
+
+        <div class="flex flex-col space-y-[3px]">
+            <label class="font-bold">Phone</label>
+            <input id="phone" class="h-[40px] px-[10px] rounded-[5px] border border-[#E0E0E0] " type="text">
+        </div>
+
+        <div class="flex flex-col space-y-[3px]">
+            <label class="font-bold">Email</label>
+            <input id="email" class="h-[40px] px-[10px] rounded-[5px] border border-[#E0E0E0] " type="text">
+        </div>
+
+        <div class="flex flex-col space-y-[3px]">
+            <label class="font-bold">Password</label>
+            <input id="Password" class="h-[40px] px-[10px] rounded-[5px] border border-[#E0E0E0] " type="text">
+        </div>
+
+        <div class="flex flex-col space-y-[3px]">
+            <label class="font-bold">repeat Password</label>
+            <input id="repeatPassword" class="h-[40px] px-[10px] rounded-[5px] border border-[#E0E0E0] " type="text">
+        </div>
+
+        <div class="flex flex-col space-y-[3px]">
+            <button class="h-[40px] bg-red-500 text-white rounded-[5px]">Register</button>
+        </div>
+      </form>
+    </div>
+    </div>
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
