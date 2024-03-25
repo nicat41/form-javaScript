@@ -62,6 +62,18 @@ if(passwordInput) {
 }
 }
 
+const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+let checkEmail = (element) => {
+    let isEmail = validateEmail(element.value)
+    if(!isEmail && !element.parentElement.querySelector('p'))
+    errorHTML(element, "zehmet olmasa email duzgun daxil edin")
+}
 form.addEventListener('submit', (e) => {
     //// 1  e.preventDefault() medodunda her submit hadisesinde default davranışını dayandırıram
     e.preventDefault()
@@ -84,6 +96,9 @@ form.addEventListener('submit', (e) => {
          //// submit olan zaman eger data some varsa bunu checkPassword(element) metodunu cagiriram daha sonra yuxarida ki funksiyada bunu isledirem
          if(element.getAttribute("data-some")) {
             checkPassword(element)
+         }
+         if(element.getAttribute("data-email")) {
+            checkEmail(element)
          }
 
         }
