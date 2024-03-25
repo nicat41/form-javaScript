@@ -74,6 +74,25 @@ let checkEmail = (element) => {
     if(!isEmail && !element.parentElement.querySelector('p'))
     errorHTML(element, "zehmet olmasa email duzgun daxil edin")
 }
+
+let validateUSPhoneNumber = (phonenumber) => {
+  var regExp = /^(\([0-9]{3}\) |[0-9]{3})[0-9]{3}[0-9]{2}[0-9]{2}/;
+  let phone = phonenumber.match(regExp);
+  if (phone) {
+      return true;
+        }
+      else {
+        return false;
+        }
+}
+let checkPhone = (element) => {
+    let value = element.value;
+    if(!validateUSPhoneNumber(value) && !element.parentElement.querySelector('p')) {
+    errorHTML(element, "zehmet olmasa telefon nomresi duzgun daxil edin")
+
+    }
+}
+
 form.addEventListener('submit', (e) => {
     //// 1  e.preventDefault() medodunda her submit hadisesinde default davranışını dayandırıram
     e.preventDefault()
@@ -99,6 +118,9 @@ form.addEventListener('submit', (e) => {
          }
          if(element.getAttribute("data-email")) {
             checkEmail(element)
+         }
+         if(element.getAttribute("data-phone")) {
+            checkPhone(element)
          }
 
         }
