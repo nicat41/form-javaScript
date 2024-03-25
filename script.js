@@ -9,7 +9,11 @@ let errorHTML = (element, message) => {
             element.classList.add("border-red-500")
             ///// 9  ve inptun class ina da border-red di elave ed
 }
-
+let successHTML = (element) => {
+    //// 10 eger inputun icerisindeki deyer doludursa oz zaman onceden olan p tab ve sil ve class.listindeki borderi de sil
+    if(element.parentElement.querySelector("p")) (element.parentElement.querySelector("p")).remove();
+    element.classList.remove("border-red-500");
+}
 
 //////// 5 asagidaki checkRequired funksiyasina oturduyumuz inputlari  checkRequired funksiyasinin icine elementlere otururuk ve colden gelen inputdu burda qebul edirik
 let checkRequired = (element) => {
@@ -18,9 +22,7 @@ let checkRequired = (element) => {
         errorHTML(element, ` ${element.id} is Required`)
      }
      else {
-        //// 10 eger inputun icerisindeki deyer doludursa oz zaman onceden olan p tab ve sil ve class.listindeki borderi de sil
-        if(element.parentElement.querySelector("p")) (element.parentElement.querySelector("p")).remove();
-        element.classList.remove("border-red-500");
+        successHTML(element)
      }
 }
 
@@ -41,6 +43,25 @@ let checkMinMax = (element) => {
     }
 }
 
+let checkPassword = (element) => {
+    ///// some da yazdigimiz elementin atributunu da data some olani aliriq ve menimsedirik som deyisgenine
+let some = element.getAttribute("data-some");
+///// daha sonra biz id isi data-some enin icinde olan password ki var onu document.queryselectorda cagirdigimiz zaman deyirik ki ordaki id ni godur ikisinide id beraber oldugu ucun bize o da verir
+let passwordInput = document.querySelector(`#${some}`)
+
+if(passwordInput) {
+    //// if in de icerisinde deyirik ki eger passwordInput almisiqsa o zaman yeni if ture dursa isle
+    let passwordValue = passwordInput.value;
+    //////  passwordValue deyiseninde passwordInput icindeki deyeri aliriq
+    let elementValue = element.value;
+    ///// ve passwordInput deyiskenine de elementdin valuesini de aldigdan sonra da
+    if(passwordValue !== elementValue) {
+        //// if icersinde deyirik ki eger passwordValue beraber deyilse elementValue bu zaman asagidaki bildirisi cixarsin brauzere
+        errorHTML(element, "sifreler uygun deyil")
+    }
+}
+}
+
 form.addEventListener('submit', (e) => {
     //// 1  e.preventDefault() medodunda her submit hadisesinde default davranışını dayandırıram
     e.preventDefault()
@@ -59,6 +80,10 @@ form.addEventListener('submit', (e) => {
          ///// burdan aldigimiz deyerlerden biri varsa   checkMinMax(element) funksiyasini islet daha sonra yuxarida bu funksiyani yoxla
          if(element.getAttribute("data-min") || element.getAttribute("data-max")) {
             checkMinMax(element)
+         }
+         //// submit olan zaman eger data some varsa bunu checkPassword(element) metodunu cagiriram daha sonra yuxarida ki funksiyada bunu isledirem
+         if(element.getAttribute("data-some")) {
+            checkPassword(element)
          }
 
         }
